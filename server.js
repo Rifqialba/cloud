@@ -13,6 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 
 const upload = multer({ dest: "uploads/" });
 
+// ➕ Tambahkan route GET /
+app.get("/", (req, res) => {
+  res.send(`
+    <h2>Upload File ke S3</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="text" name="description" placeholder="Deskripsi" required><br><br>
+      <input type="file" name="file" required><br><br>
+      <button type="submit">Upload</button>
+    </form>
+  `);
+});
+
 app.post("/upload", upload.single("file"), (req, res) => {
   const { description } = req.body;
   const file = req.file;
@@ -36,4 +48,8 @@ app.post("/upload", upload.single("file"), (req, res) => {
       res.send(`<p>Upload berhasil! <a href="${s3Url}" target="_blank">Lihat file</a></p>`);
     });
   });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });

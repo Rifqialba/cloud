@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload File</title>
+  </head>
+  <body>
+    <h2>Upload File ke S3 + Deskripsi ke DB</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <label>Deskripsi:</label><br />
+      <input type="text" name="description" required /><br /><br />
+      <label>File:</label><br />
+      <input type="file" name="file" required /><br /><br />
+      <button type="submit">Upload</button>
+    </form>
+  </body>
+</html>
